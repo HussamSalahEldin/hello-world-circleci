@@ -53,7 +53,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run: echo "text to output here" > output.txt
+      - run: echo "text to output here" > ~/output.txt
       - persist_to_workspace:
           root: ~/
           paths:
