@@ -59,7 +59,7 @@ jobs:
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
-            - output.txt
+            - target/output.txt
             
             
   print_output_file:
