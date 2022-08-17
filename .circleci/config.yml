@@ -53,13 +53,11 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          name: "text to output"
-          command: echo "text to output here" > output.txt
+      - run: echo "text to output here" > output.txt
       - persist_to_workspace:
-          root: /tmp/dir
+          root: ~/
           paths:
-            - target/output.txt
+            - output.txt
             
             
   print_output_file:
@@ -71,11 +69,9 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          name: "text to output"
-          command: cat output.txt
+      - run: cat output.txt
       - attach_workspace:
-          at: /tmp/dir
+          at: ~/
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
