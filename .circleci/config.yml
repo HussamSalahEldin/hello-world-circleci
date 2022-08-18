@@ -5,7 +5,7 @@ commands:
   print_pipeline_id_command:
     steps:
       - run: return 1
-      - run
+      - run:
         name: run when failed
         command: echo 'run when error'
         when: on_fail
