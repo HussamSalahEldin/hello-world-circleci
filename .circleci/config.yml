@@ -6,9 +6,9 @@ commands:
     steps:
       - run: return 1
       - run:
-        name: run when failed
-        command: echo 'run when error'
-        when: on_fail
+          name: run when failed
+          command: echo 'run when error'
+          when: on_fail
 
 jobs:
   print_pipeline_id_job:
