@@ -4,11 +4,9 @@ version: 2.1
 commands:
   print_pipeline_id_command:
     steps:
-      - run: return 1
       - run:
-          name: run when failed
-          command: echo 'run when error'
-          when: on_fail
+          name: run
+          command: echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >> and my name is $MyName
 
 jobs:
   print_pipeline_id_job:
