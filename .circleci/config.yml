@@ -1,24 +1,48 @@
 
 version: 2.1
-
-commands:
-  print_pipeline_id_command:
-    steps:
-      - run:
-          name: run
-          command: echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >> and my name is $MyName
-
+orbs:
+  # Choose either one of the orbs below
+  # welcome: circleci/welcome-orb@0.4.1
+  # aws-cli: circleci/aws-cli@2.0.3
+# Define the jobs we want to run for this project
 jobs:
-  print_pipeline_id_job:
+  create_infrastructure: 
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
     steps:
-      - print_pipeline_id_command
-
+      - checkout
+      - run:
+        name: Create Cloudformation Stack
+        command: |
+          aws cloudformation deploy \
+            --template-file template.yml \
+            --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+            --region us-east-1
+# Sequential workflow
 workflows:
-  say-hello-workflow:
+  # Name the workflow
+  myWorkflow:
     jobs:
-      - print_pipeline_id_job
+      - create_infrastructure
+      
+# commands:
+#   print_pipeline_id_command:
+#     steps:
+#       - run:
+#           name: run
+#           command: echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >> and my name is $MyName
+
+# jobs:
+#   print_pipeline_id_job:
+#     docker:
+#       - image: circleci/node:13.8.0
+#     steps:
+#       - print_pipeline_id_command
+
+# workflows:
+#   say-hello-workflow:
+#     jobs:
+#       - print_pipeline_id_job
 
 #   print_hello:
 #     docker:
