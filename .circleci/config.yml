@@ -28,6 +28,10 @@ jobs:
               # You can get this ID in the section where you registered the SSH Key
               fingerprints: ["25:e1:b9:6c:93:fe:88:0c:ed:5b:f4:c9:52:4c:de:6e"]
       - run:
+          name: Install ssh
+          command: |
+            apk add openssh-client
+      - run:
           name: Install Ansible
           command: |
             apk add --update ansible
