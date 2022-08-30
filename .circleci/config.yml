@@ -27,14 +27,14 @@ jobs:
       - add_ssh_keys:
               # You can get this ID in the section where you registered the SSH Key
               fingerprints: ["25:e1:b9:6c:93:fe:88:0c:ed:5b:f4:c9:52:4c:de:6e"]
-      - run:
-          name: Install ssh
-          command: |
-            apk add openssh-client
+
       - run:
           name: Install Ansible
           command: |
-            apk add --update ansible
+            apk add --no-cache --virtual build-dependencies python3-dev libffi-dev openssl-dev build-base
+            pip3 install --upgrade pip
+            pip3 install ansible
+            apk add openssh-client
       - run:
           name: Run Playbook and Configure server
           command: |
